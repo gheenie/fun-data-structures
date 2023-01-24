@@ -1,0 +1,23 @@
+{
+  "name": "fun-data-structures",
+  "version": "1.0.0",
+  "description": "In this sprint you will be implementing 2 data structures that are commonly used in computer science: [stacks](https://www.tutorialspoint.com/data_structures_algorithms/stack_algorithm.htm) and [queues](https://www.tutorialspoint.com/data_structures_algorithms/dsa_queue.htm).",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infoomics/fun-data-structures.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/infoomics/fun-data-structures/issues"
+  },
+  "homepage": "https://github.com/infoomics/fun-data-structures#readme",
+  "devDependencies": {
+    "jest": "^29.4.0"
+  }
+}
