@@ -12,7 +12,7 @@ function createStack(maxSize = 5) {
 }
 
 function push(item) {
-  this.storage[++this.index] = item;
+  if (this.index < this.maxSize) this.storage[++this.index] = item;
 }
 
 module.exports = createStack;
