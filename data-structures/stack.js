@@ -2,6 +2,7 @@ function createStack(maxSize = 5) {
   // build your stack object inside this factory function
 
   const stack = {};
+  
   stack.quantity = 0;
   stack.storage = {};
   stack.maxSize = maxSize;
