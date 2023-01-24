@@ -15,15 +15,19 @@ function createStack(maxSize = 5) {
 }
 
 function push(item) {
-  if (this.quantity < this.maxSize) {
-    this.storage[++this.quantity] = item;
-  }
+  if (this.quantity === this.maxSize) throw new Error('stack is full');
+
+  this.storage[++this.quantity] = item;
 }
 
 function pop() {
-  if (this.quantity > 0) {
-    delete this.storage[this.quantity--];
-  }
+  if (this.quantity === 0) throw new Error('stack is empty');
+
+  const poppedItem = this.storage[this.quantity];
+
+  delete this.storage[this.quantity--];
+
+  return poppedItem;
 }
 
 function isEmpty() {

@@ -17,40 +17,45 @@ describe('', () => {
         expect(testStack.maxSize).toBe(10);
     });
 
-    test('push(); nothing happens past max items', () => {
+    test('push(); throw error past max items', () => {
         const testStack = createStack();
 
         testStack.push('apple');
         testStack.push('orange');
 
+        expect(testStack.quantity).toBe(2);
         expect(testStack.storage).toEqual({ 1: 'apple', 2: 'orange' });
 
         testStack.push('c');
         testStack.push('d');
         testStack.push('e');
-        testStack.push('past');
 
+        expect(testStack.quantity).toBe(5);
         expect(testStack.storage).toEqual({ 1: 'apple', 2: 'orange', 3: 'c', 4: 'd', 5: 'e' });
+
+        expect( () => testStack.push('past') ).toThrow('stack is full');
     });
 
-    test('pop(); correct index when pop then push; nothing happens at 0 items', () => {
+    test('pop(); correct index when pop then push; throw error at 0 items', () => {
         const testStack = createStack();
 
         testStack.push('apple');
         testStack.push('orange');
-        testStack.pop();
+        const output = testStack.pop();
 
+        expect(output).toBe('orange');
+        expect(testStack.quantity).toBe(1);
         expect(testStack.storage).toEqual({ 1: 'apple' });
 
         testStack.push('c');
 
+        expect(testStack.quantity).toBe(2);
         expect(testStack.storage).toEqual({ 1: 'apple', 2: 'c' });
 
         testStack.pop();
         testStack.pop();
-        testStack.pop();
-
-        expect(testStack.storage).toEqual({});
+        
+        expect( () => testStack.pop() ).toThrow('stack is empty');
     });
 
     test('isEmpty() - empty; one item', () => {
