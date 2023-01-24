@@ -32,6 +32,16 @@ a) What is the **return value** of `createSpaceShip` ( think carefully about thi
 b) What will line 26 print when `ship1` is compared with `ship2` using `===`</br>
 c) How could we change `createSpaceShip` so we have a reusable function that generates brand new space ship instances
 
+a. {
+  name: 'USS Enterprise',
+  captain: 'Jean Luc-Picard',
+  class: 'NCC-1701-D'
+}
+
+b. true
+
+c. place spaceShip declaration inside createSpaceShip
+
 ---
 
 &nbsp;
@@ -74,6 +84,16 @@ e) What will `dataSet1.calculateMean === dataSet2.calculateMean` evaluate to ?
 - why does it evaluate to this value ?
 - why is this problematic ?
 
+a. { 1: 1, 2: 2, 3: 3, calculateMean: function() {} }. ie an object with key value pairs, and one calculateMean key with specific function definition
+
+b. any number of arguments can be passed. stored as array named values.
+
+c. 2. ie changes depending on what was passed as ...values
+
+d. 2
+
+e. false. function is defined lexically, specific to each ...values. the func's definition is generic at first but becomes specific.
+
 ---
 
 &nbsp;
@@ -103,6 +123,9 @@ dog1.speak();
 a) What is the syntax `{name , age, breed, stateBreed, speak }` shorthand for ?</br>
 b) What does `this` point to when `speak` is invoked on the line with `dog1.speak();`
 
+a. { name: name, ..., speak: speak }
+b. dog1
+
 ---
 
 &nbsp;
@@ -123,3 +146,5 @@ describe('createPerson()', () => {
 ```
 
 What kind of function is `createPerson` ?
+
+factory function
