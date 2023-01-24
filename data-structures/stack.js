@@ -6,13 +6,42 @@ function createStack(maxSize = 5) {
   stack.storage = {};
   stack.maxSize = maxSize;
   stack.push = push;
-  stack.index = 0;
+  stack.pop = pop;
+  stack.isEmpty = isEmpty;
+  stack.isFull = isFull;
+  stack.peek = peek;
 
   return stack;
 }
 
 function push(item) {
-  if (this.index < this.maxSize) this.storage[++this.index] = item;
+  if (this.quantity < this.maxSize) {
+    this.storage[++this.quantity] = item;
+  }
+}
+
+function pop() {
+  if (this.quantity > 0) {
+    delete this.storage[this.quantity--];
+  }
+}
+
+function isEmpty() {
+  if (this.quantity !== 0) return false;
+
+  for (const i in this.storage) return false;
+
+  return true;
+}
+
+function isFull() {
+  if (this.quantity === this.maxSize) return true;
+
+  return false;
+}
+
+function peek() {
+  return this.storage[this.quantity];
 }
 
 module.exports = createStack;
