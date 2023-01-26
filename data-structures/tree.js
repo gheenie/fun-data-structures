@@ -25,6 +25,9 @@ const treeProto = {
         const childrenOfLastParent = this.getChildrenOfLastParent(this.storage, parentsStr);
 
         delete childrenOfLastParent[node];
+    },
+    isRoot: function(node) {
+        return this.storage.hasOwnProperty(node);
     }
 };
 
