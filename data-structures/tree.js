@@ -1,3 +1,5 @@
+const createQueue = require('./queue');
+
 const treeProto = {
     getChildrenOfLastParent: function(currentObj, parentsSubstr) {
         const  whitespaceIndex = parentsSubstr.indexOf(' ');
@@ -49,19 +51,28 @@ const treeProto = {
         return true;
     },
     breadthFirstSearch: function(node) {
-        let parentsStr = '';
-        let matchFound = false;
+        if ( this.isRoot(node) ) return '';
 
+        const queueToCheckChildren = createQueue(999999);
+
+        // Just for queueing root node.
         for (const key in this.storage) {
-            // Change to !== if non-string node rule changes.
-            if (key == node) return parentsStr;
+            queueToCheckChildren.enQueue(key);
         }
 
-        parentsStr += key + ' ';
+        while ( !queueToCheckChildren.isEmpty() ) {
+            const parentsStr = queueToCheckChildren.deQueue();
+            const currentObj = this.getChildrenOfLastParent(this.storage, parentsStr);
 
-        if (matchFound) return parentsStr;
+            for (const key in currentObj) {
+                // Change to !== if non-string node rule changes.
+                if (key == node) return parentsStr;
 
-        return 'no matches found';
+                queueToCheckChildren.enQueue(parentsStr + ' ' + key);
+            }
+        }
+        
+        return 'no match found';
     }
 };
 
