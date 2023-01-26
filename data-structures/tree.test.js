@@ -91,3 +91,22 @@ describe('hasSiblings', () => {
         expect( testTree.hasSiblings(20, '5 15') ).toBe(false);
     });
 });
+
+describe('isLeaf', () => {
+    const testTree = createTree(5);
+    testTree.addData(15, '5');
+    testTree.addData(20, '5 15');
+    testTree.addData(33, '5');
+
+    test('not leaf; sibling 1', () => {
+        expect( testTree.isLeaf(15, '5') ).toBe(false);
+    });
+
+    test('is leaf; sibling 2', () => {
+        expect( testTree.isLeaf(33, '5') ).toBe(true);
+    });
+
+    test('is leaf; no siblings and deeper level', () => {
+        expect( testTree.isLeaf(20, '5 15') ).toBe(true);
+    });
+});

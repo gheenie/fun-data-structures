@@ -38,6 +38,15 @@ const treeProto = {
         }
 
         return false;
+    },
+    isLeaf: function(node, parentsStr) {
+        const childrenOfLastParent = this.getChildrenOfLastParent(this.storage, parentsStr);
+
+        for (const key in childrenOfLastParent[node]) {
+            return false;
+        }
+
+        return true;
     }
 };
 
