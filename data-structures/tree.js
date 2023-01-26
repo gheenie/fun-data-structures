@@ -28,6 +28,16 @@ const treeProto = {
     },
     isRoot: function(node) {
         return this.storage.hasOwnProperty(node);
+    },
+    hasSiblings: function(node, parentsStr) {
+        const childrenOfLastParent = this.getChildrenOfLastParent(this.storage, parentsStr);
+
+        for (const key in childrenOfLastParent) {
+            // Change to !== if non-string node rule changes.
+            if (key != node) return true;
+        }
+
+        return false;
     }
 };
 
@@ -36,6 +46,7 @@ function createTree(node) {
     // Only 1 root node. Enforced by formatting of parentsStr and logic of addData.
     /* Passing in node arguments also requires passing in full parent path.
     If no parent path = add/remove to all nodes; any 1 node apply boolean funcs */
+    // Nodes can be passed as non-string, but will be casted to string in the tree.
 
     const tree = Object.create(treeProto);
 

@@ -72,3 +72,22 @@ describe('isRoot', () => {
         expect( testTree.isRoot(15) ).toBe(false);
     });
 });
+
+describe('hasSiblings', () => {
+    const testTree = createTree(5);
+    testTree.addData(15, '5');
+    testTree.addData(20, '5 15');
+    testTree.addData(33, '5');
+
+    test('siblings present; sibling 1', () => {
+        expect( testTree.hasSiblings(15, '5') ).toBe(true);
+    });
+
+    test('siblings present; sibling 2', () => {
+        expect( testTree.hasSiblings(33, '5') ).toBe(true);
+    });
+
+    test('no siblings', () => {
+        expect( testTree.hasSiblings(20, '5 15') ).toBe(false);
+    });
+});
