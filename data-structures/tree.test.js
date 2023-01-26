@@ -118,6 +118,7 @@ describe('breadthFirstSearch', () => {
     testTree.addData(33, '5');
     testTree.addData(100, '5 15 20');
     testTree.addData(100, '5 33');
+    // { 5: { 15: { 20: { 100: {} } }, 33: { 100: {} } } }
 
     test('match found', () => {
         expect( testTree.breadthFirstSearch(100) ).toBe('5 33');
@@ -133,5 +134,38 @@ describe('breadthFirstSearch', () => {
 
     test('match found is root', () => {
         expect( testTree.breadthFirstSearch(5) ).toBe('');
+    });
+});
+
+describe('depthFirstSearch', () => {
+    test('either side is deeper than a middle match; deeper left side', () => {
+        const testTree = createTree(5);
+        testTree.addData(4, '5');
+        testTree.addData(6, '5 4');
+        testTree.addData(7, '5 4 6');
+        testTree.addData(100, '5 4 6 7');
+        testTree.addData(33, '5');
+        testTree.addData(100, '5 33');
+        testTree.addData(15, '5');
+        testTree.addData(20, '5 15');
+        testTree.addData(100, '5 15 20');
+        // { 5: { 4: { 6: { 7: { 100: {} } } }, 33: { 100: {} }, 15: { 20: { 100: {} } } } }
+        
+        expect( testTree.depthFirstSearch(100) ).toBe('5 4 6 7');
+    });
+
+    test('either side is deeper than a middle match; shallower right side', () => {
+        const testTree = createTree(5);
+        testTree.addData(15, '5');
+        testTree.addData(20, '5 15');
+        testTree.addData(7, '5 15 20');
+        testTree.addData(100, '5 15 20 7');
+        testTree.addData(33, '5');
+        testTree.addData(100, '5 33');
+        testTree.addData(4, '5');
+        testTree.addData(6, '5 4');
+        testTree.addData(100, '5 4 6');
+        
+        expect( testTree.depthFirstSearch(100) ).toBe('5 4 6');
     });
 });
