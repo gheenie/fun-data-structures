@@ -20,12 +20,19 @@ const treeProto = {
         if ( childrenOfLastParent.hasOwnProperty(node) ) throw new Error('node already exists');
 
         childrenOfLastParent[node] = {};
+    },
+    removeData: function(node, parentsStr) {
+        const childrenOfLastParent = this.getChildrenOfLastParent(this.storage, parentsStr);
+
+        delete childrenOfLastParent[node];
     }
 };
 
 function createTree(node) {
-    // Siblings must be unique.
-    // Only 1 root node.
+    // Siblings must be unique. Enforced inside addData.
+    // Only 1 root node. Enforced by formatting of parentsStr and logic of addData.
+    /* Passing in node arguments also requires passing in full parent path.
+    If no parent path = add/remove to all nodes; any 1 node apply boolean funcs */
 
     const tree = Object.create(treeProto);
 
