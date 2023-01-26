@@ -168,4 +168,19 @@ describe('depthFirstSearch', () => {
         
         expect( testTree.depthFirstSearch(100) ).toBe('5 4 6');
     });
+
+    test('middle class most shallow but parent most alphabetical', () => {
+        const testTree = createTree(5);
+        testTree.addData(15, '5');
+        testTree.addData(20, '5 15');
+        testTree.addData(7, '5 15 20');
+        testTree.addData(100, '5 15 20 7');
+        testTree.addData(1, '5');
+        testTree.addData(100, '5 1');
+        testTree.addData(4, '5');
+        testTree.addData(6, '5 4');
+        testTree.addData(100, '5 4 6');
+        
+        expect( testTree.depthFirstSearch(100) ).toBe('5 1');
+    });
 });
