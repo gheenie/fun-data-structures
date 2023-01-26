@@ -110,3 +110,20 @@ describe('isLeaf', () => {
         expect( testTree.isLeaf(20, '5 15') ).toBe(true);
     });
 });
+
+describe('breadthFirstSearch', () => {
+    const testTree = createTree(5);
+    testTree.addData(15, '5');
+    testTree.addData(20, '5 15');
+    testTree.addData(33, '5');
+    testTree.addData(100, '5 15 20');
+    testTree.addData(100, '5 33');
+
+    test('match found', () => {
+        expect( testTree.breadthFirstSearch(100) ).toBe('5 33');
+    });
+
+    test('no match found', () => {
+        expect( testTree.breadthFirstSearch(99) ).toBe('no match found');
+    });
+});
