@@ -126,4 +126,12 @@ describe('breadthFirstSearch', () => {
     test('no match found', () => {
         expect( testTree.breadthFirstSearch(99) ).toBe('no match found');
     });
+
+    test('match found', () => {
+        expect( testTree.breadthFirstSearch(100) ).toBe('5 33');
+    });
+
+    test('match found is root', () => {
+        expect( testTree.breadthFirstSearch(5) ).toBe('');
+    });
 });
