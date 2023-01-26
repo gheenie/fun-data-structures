@@ -47,6 +47,21 @@ const treeProto = {
         }
 
         return true;
+    },
+    breadthFirstSearch: function(node) {
+        let parentsStr = '';
+        let matchFound = false;
+
+        for (const key in this.storage) {
+            // Change to !== if non-string node rule changes.
+            if (key == node) return parentsStr;
+        }
+
+        parentsStr += key + ' ';
+
+        if (matchFound) return parentsStr;
+
+        return 'no matches found';
     }
 };
 
