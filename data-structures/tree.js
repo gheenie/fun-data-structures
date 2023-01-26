@@ -75,18 +75,28 @@ const treeProto = {
         return 'no match found';
     },
     depthFirstSearch: function(node) {
-        function search(node2, parentsStr) {
-            const currentObj = this.getChildrenOfLastParent(this.storage, parentsStr);
+        // When branching to multiple siblings to depth search, it will choose alphabetical order.
 
+        if ( this.isRoot(node) ) return '';
+
+        // Just for getting root node and its children object.
+        let currentObj = {};
+        let parentsStr = '';
+        for (const key in this.storage) {
+            currentObj = this.getChildrenOfLastParent(this.storage, key);
+            parentsStr = key;
+        }
+
+        function search(node, currentObj, parentsStr) {
             for (const key in currentObj) {
                 // Change to !== if non-string node rule changes.
-                if (key == node2) return parentsStr;
+                if (key == node) return parentsStr;
 
-                return search(node2, parentsStr + ' ' + key)
+                return search(node, currentObj[key], parentsStr + ' ' + key);
             }
         }
 
-        return search(node, 5);
+        return search(node, currentObj, parentsStr);
     }
 };
 
