@@ -73,6 +73,20 @@ const treeProto = {
         }
         
         return 'no match found';
+    },
+    depthFirstSearch: function(node) {
+        function search(node2, parentsStr) {
+            const currentObj = this.getChildrenOfLastParent(this.storage, parentsStr);
+
+            for (const key in currentObj) {
+                // Change to !== if non-string node rule changes.
+                if (key == node2) return parentsStr;
+
+                return search(node2, parentsStr + ' ' + key)
+            }
+        }
+
+        return search(node, 5);
     }
 };
 
